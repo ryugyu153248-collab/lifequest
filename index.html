@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LIFE QUEST</title>
+<meta name="theme-color" content="#0B1230"><link rel="manifest" href="/manifest.json"><link rel="apple-touch-icon" href="/icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="LIFE QUEST">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);--pri:#7857FF;--btn:#7857FF;--prog:#4DA3FF;--bg:#0B1230;--card:#1A1F4A;--txt:#F8FAFC;--ctxt:#F8FAFC;--onbtn:#fff;--mut:#9aa3c7}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--txt);font-family:'Noto Sans Thai','Sarabun',system-ui,sans-serif;font-size:15px}
+#app{max-width:480px;margin:0 auto;padding:14px 14px 100px;min-height:100vh}
+h1,h2,h3{margin:0}h2{font-size:20px}h3{font-size:16px}small{color:var(--mut)}
+.card{background:var(--card);color:var(--ctxt);border-radius:18px;padding:14px;margin:10px 0;box-shadow:0 2px 14px #0003}
+.card small{color:var(--mut)}
+.row{display:flex;align-items:center;gap:10px}.sp{justify-content:space-between}.g{flex:1}
+.bar{height:12px;border-radius:9px;background:#8883;overflow:hidden}.bar i{display:block;height:100%;background:var(--prog);border-radius:9px;transition:width .5s;box-shadow:0 0 10px var(--prog)}
+button,.btn{font:inherit;border:0;border-radius:12px;padding:10px 14px;background:var(--btn);color:var(--onbtn);font-weight:600;cursor:pointer}
+button.sec{background:#8883;color:var(--ctxt)}button.dng{background:#dc2626;color:#fff}button:disabled{opacity:.5}
+input,select,textarea{font:inherit;width:100%;padding:10px;border-radius:12px;border:1px solid #8885;background:#0000001a;color:inherit;margin:4px 0 8px}
+input[type=color]{padding:2px;height:42px;width:56px}input[type=checkbox]{width:auto}
+label{font-size:13px;color:var(--mut)}
+.q{display:flex;gap:12px;align-items:center}.q.dn{opacity:.6}.q.dn b{text-decoration:line-through}
+.ic{font-size:26px;width:46px;height:46px;border-radius:14px;background:#8882;display:grid;place-items:center;flex:none}
+.qb{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}.qb b{overflow:hidden;text-overflow:ellipsis}
+.chip{font-size:12px;color:var(--prog);font-weight:600}
+.ck{padding:8px 12px;font-size:13px}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);color:var(--ctxt);display:flex;justify-content:center;padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px));border-top:1px solid #8883;z-index:5}
+nav div{display:flex;width:100%;max-width:480px}
+nav a{flex:1;text-align:center;font-size:12px;color:var(--mut);cursor:pointer;padding:4px}nav a b{display:block;font-size:20px}nav a.on{color:var(--pri);font-weight:700}
+.fab{position:fixed;right:max(16px,calc(50% - 224px));bottom:calc(76px + env(safe-area-inset-bottom,0px));width:54px;height:54px;border-radius:50%;font-size:28px;padding:0;z-index:6;box-shadow:0 0 18px var(--pri)}
+#md{position:fixed;inset:0;background:#000a;display:none;align-items:flex-end;justify-content:center;z-index:20}
+.sheet{background:var(--card);color:var(--ctxt);width:100%;max-width:480px;max-height:90vh;overflow:auto;border-radius:22px 22px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px))}
+#ts{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:0;right:0;z-index:40;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none}
+#ts div{background:var(--pri);color:#fff;padding:9px 16px;border-radius:14px;font-weight:600;box-shadow:0 4px 16px #0006;animation:in .3s;max-width:90%}
+@keyframes in{from{transform:translateY(-20px);opacity:0}}
+.lv{position:fixed;inset:0;background:#000c;z-index:50;display:grid;place-items:center;text-align:center;color:#fff;animation:in .4s}
+.lv .n{font-size:90px;animation:pop .8s infinite alternate;text-shadow:0 0 30px var(--pri)}@keyframes pop{to{transform:scale(1.15)}}
+.seg{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.seg>*{padding:8px 12px;border-radius:12px;background:#8883;cursor:pointer;font-size:13px;border:2px solid transparent}.seg .on{border-color:var(--pri);background:#8885}
+.sw{width:38px;height:38px;border-radius:50%;border:3px solid transparent;cursor:pointer}.sw.on{border-color:var(--txt)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:12px}.cal div{padding:6px 0;border-radius:8px;cursor:pointer}.cal .h{color:var(--mut);cursor:default}
+.chart{display:flex;gap:8px;align-items:flex-end;height:110px}.chart div{flex:1;text-align:center;font-size:11px;color:var(--mut)}.chart i{display:block;background:var(--prog);border-radius:6px 6px 0 0;margin-bottom:4px;min-height:3px}
+.ach{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.ach div{text-align:center;padding:10px 4px;border-radius:14px;background:#8882;font-size:12px}.ach .lk{opacity:.35;filter:grayscale(1)}.ach b{font-size:28px;display:block}
+.av{font-size:64px;width:100px;height:100px;border-radius:50%;display:grid;place-items:center;background:#8882;border:3px solid var(--pri);box-shadow:0 0 20px var(--pri);margin:0 auto}
+.tgl{display:flex;justify-content:space-between;align-items:center;padding:8px 0}
+.lnk{display:flex;justify-content:space-between;padding:14px 4px;cursor:pointer;border-bottom:1px solid #8882}
+.emp{text-align:center;padding:30px 10px;color:var(--mut)}
+</style></head><body>
+<div id="app"></div><div id="md" onclick="if(event.target==this)closeModal()"></div><div id="ts"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const K='lifequest_v1';
+const PRE={fantasy:{n:'Fantasy Purple',pri:'#7857FF',btn:'#7857FF',prog:'#4DA3FF',bg:'#0B1230',card:'#1A1F4A'},space:{n:'Space Blue',pri:'#3B82F6',btn:'#2563EB',prog:'#38BDF8',bg:'#060E24',card:'#0F1D45'},nature:{n:'Nature Green',pri:'#22C55E',btn:'#16A34A',prog:'#86EFAC',bg:'#0A1F14',card:'#12301F'},sakura:{n:'Sakura Pink',pri:'#F472B6',btn:'#EC4899',prog:'#F9A8D4',bg:'#2A1220',card:'#3B1A2E'},sunset:{n:'Sunset Orange',pri:'#FB923C',btn:'#F97316',prog:'#FDBA74',bg:'#241209',card:'#3A1F10'},mono:{n:'Minimal Monochrome',pri:'#E5E5E5',btn:'#A3A3A3',prog:'#D4D4D4',bg:'#0A0A0A',card:'#1C1C1C'}};
+const DIFF={easy:{n:'ง่าย',x:10},mid:{n:'ปานกลาง',x:25},hard:{n:'ยาก',x:50}};
+const CATS=['อ่านหนังสือ','สุขภาพ','การเรียนรู้','งาน','ไลฟ์สไตล์','บ้าน'];
+const ICONS=['📚','🏃','💧','🧹','☕','🌅','💼','🎯','🇬🇧','🧘','🍎','🎨'];
+const AVS=['🧙','🦸','🧝','🥷','🐉','🦊','🤖','👑'];
+const DOW=['อา','จ','อ','พ','พฤ','ศ','ส'];
+const DEF=()=>({name:'',avatar:'🧙',onboarded:false,exp:0,quests:[],log:{},bonus:{},ach:{},del:[],uid:null,dirty:false,theme:{preset:'fantasy',mode:'dark',ov:{}},saved:[],notif:{on:true,leads:[10],end:true,sum:'18:00',quiet:{on:false,from:'22:00',to:'07:00'}},fired:{}});
+let S=DEF(),R='home',D=null,cm=new Date(),selDay=null,E={};
+try{const r=localStorage.getItem(K);if(r)S=Object.assign(DEF(),JSON.parse(r))}catch(e){}
+const saveLocal=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const save=()=>{S.dirty=true;saveLocal();queueSync()};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const key=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const today=()=>key(new Date());
+const pd=k=>new Date(k+'T00:00:00');
+const thDate=(k,o)=>pd(k).toLocaleDateString('th-TH',o||{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+const uid=()=>crypto.randomUUID();
+/* ---------- colour / theme tokens ---------- */
+const rgb=h=>{h=h.replace('#','');return[0,2,4].map(i=>parseInt(h.substr(i,2),16))};
+const hex=a=>'#'+a.map(v=>Math.round(v).toString(16).padStart(2,'0')).join('');
+const mix=(a,b,t)=>{const x=rgb(a),y=rgb(b);return hex(x.map((v,i)=>v*(1-t)+y[i]*t))};
+const lum=h=>{const[r,g,b]=rgb(h).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*r+.7152*g+.0722*b};
+const ink=h=>lum(h)>.45?'#111827':'#F8FAFC';
+const ratio=(a,b)=>{const x=lum(a),y=lum(b);return(Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
+const okHex=v=>/^#[0-9a-fA-F]{6}$/.test(v);
+function resolve(t){const p=PRE[t.preset]||PRE.fantasy,o=t.ov||{};const m=t.mode=='auto'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):t.mode,L=m=='light';
+const fx=c=>L&&lum(c)>.6?mix(c,'#000000',.65):c;
+const bg=o.bg||(L?mix(p.pri,'#ffffff',.93):p.bg),card=o.card||(L?'#ffffff':p.card),btn=o.btn||fx(p.btn),pri=o.pri||fx(p.pri),prog=o.prog||fx(p.prog);
+const txt=o.txt||ink(bg),ctxt=o.txt||ink(card);
+return{'--pri':pri,'--btn':btn,'--prog':prog,'--bg':bg,'--card':card,'--txt':txt,'--ctxt':ctxt,'--onbtn':ink(btn),'--mut':mix(ctxt,card,.4)}}
+function paint(el,t){const v=resolve(t);for(const k in v)el.style.setProperty(k,v[k])}
+/* ---------- game logic ---------- */
+function lvlOf(x){let l=1,need=100;while(x>=need){x-=need;l++;need=100+(l-1)*50}return{l,cur:x,need}}
+const dow=k=>pd(k).getDay();
+const appears=(q,d)=>!q.paused&&(q.rep=='once'?q.date==d:d>=q.start&&(q.rep=='daily'||(q.days||[]).includes(dow(d))));
+const questsOn=d=>S.quests.filter(q=>appears(q,d)).sort((a,b)=>(a.time||'99').localeCompare(b.time||'99'));
+const done=(q,d)=>!!(S.log[d]&&S.log[d][q.id]);
+const dayCount=d=>Object.keys(S.log[d]||{}).length;
+function streaks(){const ks=Object.keys(S.log).filter(k=>dayCount(k)>0).sort();const has=new Set(ks);let d=new Date();if(!has.has(key(d)))d.setDate(d.getDate()-1);let cur=0;while(has.has(key(d))){cur++;d.setDate(d.getDate()-1)}
+let best=0,run=0,prev=null;ks.forEach(k=>{run=prev&&Math.round((pd(k)-pd(prev))/864e5)==1?run+1:1;best=Math.max(best,run);prev=k});return{cur,best}}
+function totals(){let n=0,read=0;for(const d in S.log)for(const i in S.log[d]){n++;if(S.log[d][i].c=='อ่านหนังสือ')read+=S.log[d][i].m||0}return{n,read,bon:Object.keys(S.bonus).length,lv:lvlOf(S.exp).l,...streaks()}}
+const ACH=[['first','🌟','ก้าวแรก','ทำภารกิจแรกสำเร็จ',s=>s.n>=1],['st7','🔥','ไฟลุกโชน','ทำภารกิจต่อเนื่อง 7 วัน',s=>s.best>=7],['n50','🏆','นักสู้ตัวจริง','ทำภารกิจสำเร็จ 50 ครั้ง',s=>s.n>=50],['rd','📚','หนอนหนังสือ','อ่านหนังสือครบ 10 ชั่วโมง',s=>s.read>=600],['lv5','⚔️','นักผจญภัย','ถึงเลเวล 5',s=>s.lv>=5],['all','🎯','ครบทั้งวัน','ทำภารกิจครบทั้งวัน',s=>s.bon>=1]];
+function checkAch(){const t=totals();ACH.forEach(a=>{if(!S.ach[a[0]]&&a[4](t)){S.ach[a[0]]=today();setTimeout(()=>notify('🏅 ปลดล็อก Achievement',a[2]+' — '+a[3]),700)}})}
+function complete(id,d){const q=S.quests.find(x=>x.id==id);if(!q||done(q,d)||d!=today())return;const L=lvlOf(S.exp).l,x=DIFF[q.diff].x;
+(S.log[d]=S.log[d]||{})[id]={t:q.title,c:q.cat,x,m:q.mins||0};S.exp+=x;let m='+'+x+' EXP';
+const ls=questsOn(d);if(ls.length&&ls.every(a=>done(a,d))&&!S.bonus[d]){S.bonus[d]=1;S.exp+=30;m+=' · โบนัสครบวัน +30'}
+notify('✅ '+q.title,m);checkAch();save();closeModal();render();if(lvlOf(S.exp).l>L)levelUp()}
+function levelUp(){const l=lvlOf(S.exp).l;const o=document.createElement('div');o.className='lv';o.onclick=()=>o.remove();o.innerHTML='<div><div style="font-size:40px">🎉✨🎊</div><div class="n">LV '+l+'</div><h2>ยินดีด้วย! เลเวลอัปแล้ว</h2><p>แตะเพื่อไปต่อ</p></div>';document.body.appendChild(o);notify('⬆️ เลเวลอัป!','คุณเลเวล '+l+' แล้ว')}
+/* ---------- notifications (works while app is open) ---------- */
+const nowM=()=>{const n=new Date();return n.getHours()*60+n.getMinutes()};
+const tm=t=>{const[a,b]=t.split(':');return+a*60+ +b};
+const quiet=()=>{const q=S.notif.quiet;if(!q.on)return false;const n=nowM(),a=tm(q.from),b=tm(q.to);return a<=b?n>=a&&n<b:n>=a||n<b};
+function toast(m){const e=document.createElement('div');e.textContent=m;$('#ts').appendChild(e);setTimeout(()=>e.remove(),3200)}
+function notify(t,b){toast(t+(b?' '+b:''));if(!S.notif.on||quiet())return;try{if('Notification' in window&&Notification.permission=='granted')new Notification(t,{body:b})}catch(e){}}
+function tick(){if(!S.onboarded||!S.notif.on)return;const d=today(),n=nowM();let ch=false;
+const fire=(k,t,b)=>{if(S.fired[k])return;S.fired[k]=1;ch=true;notify(t,b)};
+for(const k in S.fired)if(!k.startsWith(d))delete S.fired[k];
+questsOn(d).forEach(q=>{if(!q.time||done(q,d))return;const df=tm(q.time)-n;
+S.notif.leads.forEach(l=>{if(df>0&&df<=l)fire(d+q.id+l,'⏰ อีก '+df+' นาที',q.title)});
+if(S.notif.end&&df<=0&&df>-30)fire(d+q.id+'e','⌛ ถึงเวลาภารกิจแล้ว',q.title)});
+const rem=questsOn(d).filter(q=>!done(q,d)).length;if(S.notif.sum&&n>=tm(S.notif.sum)&&rem>0)fire(d+'sum','📋 ภารกิจวันนี้','ยังเหลืออีก '+rem+' ภารกิจ');if(ch)save()}
+setInterval(tick,20000);
+/* ---------- modal helpers ---------- */
+function modal(h){const m=$('#md');m.innerHTML='<div class="sheet">'+h+'</div>';m.style.display='flex'}
+function closeModal(){$('#md').style.display='none';$('#md').innerHTML=''}
+function ask(msg,fn){window._ask=fn;modal('<h3>'+msg+'</h3><div class="row" style="margin-top:14px"><button class="sec g" onclick="closeModal()">ยกเลิก</button><button class="dng g" onclick="closeModal();_ask()">ยืนยัน</button></div>')}
+/* ---------- views ---------- */
+const nav=()=>{const t=['home','quests','stats','profile'],ic=['🏠','📜','📊','🧙'],nm=['หน้าหลัก','ภารกิจ','สถิติ','โปรไฟล์'];const cur=['settings','notif','theme','general'].includes(R)?'profile':R;
+return '<nav><div>'+t.map((k,i)=>'<a class="'+(cur==k?'on':'')+'" onclick="go(\''+k+'\')"><b>'+ic[i]+'</b>'+nm[i]+'</a>').join('')+'</div></nav>'};
+const back=(t,to)=>'<div class="row" style="margin-bottom:6px"><button class="sec" onclick="go(\''+(to||'settings')+'\')">‹</button><h2>'+t+'</h2></div>';
+function go(r){R=r;if(r=='theme')D=JSON.parse(JSON.stringify(S.theme));window.scrollTo(0,0);render()}
+function qCard(q,d){const dn=done(q,d),f=DIFF[q.diff];return '<div class="card q '+(dn?'dn':'')+'" onclick="detail(\''+q.id+'\',\''+d+'\')"><div class="ic">'+q.icon+'</div><div class="qb"><b>'+esc(q.title)+'</b><small>'+esc(q.cat)+' · '+(q.time||'ทั้งวัน')+'</small><span class="chip">'+f.n+' +'+f.x+' EXP</span></div>'+(d==today()?'<button class="ck" '+(dn?'disabled':'')+' onclick="event.stopPropagation();complete(\''+q.id+'\',\''+d+'\')">'+(dn?'✓ สำเร็จ':'ทำแล้ว')+'</button>':'')+'</div>'}
+function vHome(){const d=today(),ls=questsOn(d),dn=ls.filter(q=>done(q,d)).length,L=lvlOf(S.exp),pc=ls.length?Math.round(dn/ls.length*100):0;
+return '<div class="row sp"><div><small>'+thDate(d)+'</small><h2>สวัสดี '+esc(S.name)+' '+S.avatar+'</h2></div><button class="sec" onclick="go(\'settings\')">⚙️</button></div>'+
+'<div class="card"><div class="row sp"><b>LV '+L.l+'</b><small>'+L.cur+' / '+L.need+' EXP</small></div><div class="bar"><i style="width:'+L.cur/L.need*100+'%"></i></div></div>'+
+'<div class="card"><div class="row sp"><b>ความคืบหน้าวันนี้</b><span>'+dn+'/'+ls.length+'</span></div><div class="bar" style="margin:8px 0"><i style="width:'+pc+'%"></i></div><small>สำเร็จ '+dn+' · เหลือ '+(ls.length-dn)+' ภารกิจ'+(ls.length&&dn==ls.length?' · 🎉 ครบแล้ว!':' · ครบทั้งวันรับโบนัส +30 EXP')+'</small></div>'+
+'<h3 style="margin-top:16px">ภารกิจวันนี้</h3>'+(ls.length?ls.map(q=>qCard(q,d)).join(''):'<div class="emp">ยังไม่มีภารกิจสำหรับวันนี้<br><br><button onclick="edit()">+ สร้างภารกิจแรก</button></div>')+'<button class="fab" onclick="edit()">+</button>'}
+const repL=q=>q.rep=='daily'?'ทุกวัน':q.rep=='weekly'?'ทุก '+(q.days||[]).map(i=>DOW[i]).join(' '):'วันที่ '+thDate(q.date,{day:'numeric',month:'short'});
+function vQuests(){return '<h2>ภารกิจทั้งหมด</h2>'+(S.quests.length?S.quests.map(q=>'<div class="card q '+(q.paused?'dn':'')+'" onclick="detail(\''+q.id+'\',\''+today()+'\')"><div class="ic">'+q.icon+'</div><div class="qb"><b>'+esc(q.title)+'</b><small>'+repL(q)+' · '+(q.time||'ทั้งวัน')+(q.paused?' · ⏸ พัก':'')+'</small><span class="chip">'+DIFF[q.diff].n+' +'+DIFF[q.diff].x+' EXP</span></div></div>').join(''):'<div class="emp">ยังไม่มีภารกิจ แตะ + เพื่อสร้าง</div>')+'<button class="fab" onclick="edit()">+</button>'}
+function detail(id,d){const q=S.quests.find(x=>x.id==id);if(!q)return;const dn=done(q,d);
+modal('<div class="row"><div class="ic">'+q.icon+'</div><div class="g"><h3>'+esc(q.title)+'</h3><small>'+esc(q.cat)+'</small></div></div><p>'+(esc(q.desc)||'<small>ไม่มีรายละเอียด</small>')+'</p><p><small>ความยาก: '+DIFF[q.diff].n+' (+'+DIFF[q.diff].x+' EXP)<br>เวลา: '+(q.time||'ทั้งวัน')+' · '+repL(q)+'</small></p><div class="row" style="flex-wrap:wrap">'+
+(d==today()&&!dn&&appears(q,d)?'<button onclick="complete(\''+id+'\',\''+d+'\')">✅ สำเร็จ</button>':'')+'<button class="sec" onclick="edit(\''+id+'\')">✏️ แก้ไข</button><button class="sec" onclick="postpone(\''+id+'\')">⏩ เลื่อน</button><button class="sec" onclick="pause(\''+id+'\')">'+(q.paused?'▶️ เล่นต่อ':'⏸ พัก')+'</button><button class="dng" onclick="del(\''+id+'\')">🗑 ลบ</button></div>')}
+function postpone(id){const q=S.quests.find(x=>x.id==id);if(q.rep=='once'){const d=pd(q.date);d.setDate(d.getDate()+1);q.date=key(d);toast('เลื่อนไปพรุ่งนี้แล้ว')}else{if(!q.time){toast('ภารกิจนี้ไม่ได้กำหนดเวลา');return}const m=Math.min(tm(q.time)+60,1439);q.time=String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');toast('เลื่อนเป็น '+q.time)}save();closeModal();render()}
+function pause(id){const q=S.quests.find(x=>x.id==id);q.paused=!q.paused;save();closeModal();render()}
+function del(id){ask('ลบภารกิจนี้? (ประวัติที่ทำไปแล้วยังอยู่)',()=>{S.quests=S.quests.filter(x=>x.id!=id);S.del.push(id);save();render()})}
+/* editor + local suggestion */
+const SUG=[['อ่าน',{t:'อ่านหนังสือ 20 นาที',c:'อ่านหนังสือ',df:'easy',tm:'20:00',m:20,i:'📚'}],['ออกกำลัง',{t:'ออกกำลังกาย 30 นาที',c:'สุขภาพ',df:'mid',tm:'18:00',m:30,i:'🏃'}],['วิ่ง',{t:'วิ่ง 30 นาที',c:'สุขภาพ',df:'mid',tm:'06:30',m:30,i:'🏃'}],['น้ำ',{t:'ดื่มน้ำ 8 แก้ว',c:'สุขภาพ',df:'easy',tm:'',m:0,i:'💧'}],['อังกฤษ',{t:'ฝึกภาษาอังกฤษ 20 นาที',c:'การเรียนรู้',df:'mid',tm:'21:00',m:20,i:'🇬🇧'}],['ภาษา',{t:'ฝึกภาษา 20 นาที',c:'การเรียนรู้',df:'mid',tm:'21:00',m:20,i:'🇬🇧'}],['ตื่น',{t:'ตื่นนอนเวลา 07.00 น.',c:'ไลฟ์สไตล์',df:'hard',tm:'07:00',m:0,i:'🌅'}],['ทำความสะอาด',{t:'ทำความสะอาดห้อง',c:'บ้าน',df:'mid',tm:'10:00',m:30,i:'🧹'}],['ห้อง',{t:'จัดห้องให้เรียบร้อย',c:'บ้าน',df:'easy',tm:'',m:15,i:'🧹'}],['คาเฟ่',{t:'ไปคาเฟ่ใหม่',c:'ไลฟ์สไตล์',df:'easy',tm:'14:00',m:0,i:'☕'}],['งาน',{t:'ทำงานที่ค้างอยู่ให้เสร็จ',c:'งาน',df:'hard',tm:'09:00',m:60,i:'💼'}],['เรียน',{t:'เรียนรู้ทักษะใหม่ 30 นาที',c:'การเรียนรู้',df:'mid',tm:'20:00',m:30,i:'🎯'}]];
+function edit(id){const q=id?S.quests.find(x=>x.id==id):null;E={id,icon:q?q.icon:'🎯',days:q?[...(q.days||[])]:[1,2,3,4,5]};
+const v=q||{title:'',desc:'',cat:CATS[0],diff:'easy',time:'',mins:0,rep:'daily',date:today()};
+modal('<h3>'+(q?'แก้ไขภารกิจ':'สร้างภารกิจใหม่')+'</h3><label>ชื่อภารกิจ</label><input id="f_t" value="'+esc(v.title)+'" placeholder="เช่น อ่านหนังสือ"><button class="sec" onclick="suggest()">✨ ช่วยเสนอภารกิจ (ในเครื่อง)</button><label style="display:block;margin-top:8px">รายละเอียด</label><textarea id="f_d" rows="2">'+esc(v.desc)+'</textarea><label>ไอคอน</label><div class="seg" id="f_i">'+ICONS.map(i=>'<span class="'+(i==E.icon?'on':'')+'" onclick="E.icon=\''+i+'\';document.querySelectorAll(\'#f_i span\').forEach(s=>s.classList.toggle(\'on\',s.textContent==E.icon))">'+i+'</span>').join('')+'</div><label>หมวดหมู่</label><select id="f_c">'+CATS.map(c=>'<option '+(c==v.cat?'selected':'')+'>'+c+'</option>').join('')+'</select><label>ระดับความยาก</label><select id="f_df">'+Object.keys(DIFF).map(k=>'<option value="'+k+'" '+(k==v.diff?'selected':'')+'>'+DIFF[k].n+' (+'+DIFF[k].x+' EXP)</option>').join('')+'</select><div class="row"><div class="g"><label>เวลา</label><input id="f_tm" type="time" value="'+(v.time||'')+'"></div><div class="g"><label>ใช้เวลา (นาที)</label><input id="f_m" type="number" min="0" value="'+(v.mins||0)+'"></div></div><label>การทำซ้ำ</label><select id="f_r" onchange="rep()"><option value="daily" '+(v.rep=='daily'?'selected':'')+'>ทุกวัน</option><option value="weekly" '+(v.rep=='weekly'?'selected':'')+'>รายสัปดาห์</option><option value="once" '+(v.rep=='once'?'selected':'')+'>กำหนดวันเอง</option></select><div id="f_days" class="seg">'+DOW.map((n,i)=>'<span class="'+(E.days.includes(i)?'on':'')+'" onclick="tdow('+i+',this)">'+n+'</span>').join('')+'</div><input id="f_dt" type="date" value="'+v.date+'"><div class="row" style="margin-top:8px"><button class="sec g" onclick="closeModal()">ยกเลิก</button><button class="g" onclick="saveQ()">บันทึก</button></div>');rep()}
+function rep(){const r=$('#f_r').value;$('#f_days').style.display=r=='weekly'?'flex':'none';$('#f_dt').style.display=r=='once'?'block':'none'}
+function tdow(i,el){const a=E.days.indexOf(i);a<0?E.days.push(i):E.days.splice(a,1);el.classList.toggle('on')}
+function suggest(){const t=$('#f_t').value.trim();const h=SUG.find(s=>t.includes(s[0]));if(!h){toast('ไม่พบคำแนะนำ — ตั้งค่าเองได้เลย');return}const s=h[1];$('#f_t').value=s.t;$('#f_c').value=s.c;$('#f_df').value=s.df;$('#f_tm').value=s.tm;$('#f_m').value=s.m;E.icon=s.i;document.querySelectorAll('#f_i span').forEach(e=>e.classList.toggle('on',e.textContent==E.icon));toast('เสนอแล้ว แก้ไขได้ก่อนบันทึก')}
+function saveQ(){const t=$('#f_t').value.trim();if(!t){toast('กรุณาใส่ชื่อภารกิจ');return}const r=$('#f_r').value;if(r=='weekly'&&!E.days.length){toast('เลือกวันอย่างน้อย 1 วัน');return}if(r=='once'&&!$('#f_dt').value){toast('เลือกวันที่');return}
+const o={title:t,desc:$('#f_d').value,icon:E.icon,cat:$('#f_c').value,diff:$('#f_df').value,time:$('#f_tm').value,mins:+$('#f_m').value||0,rep:r,days:E.days,date:$('#f_dt').value};
+if(E.id)Object.assign(S.quests.find(x=>x.id==E.id),o);else S.quests.push({id:uid(),start:today(),paused:false,...o});save();closeModal();render();toast('บันทึกภารกิจแล้ว')}
+/* stats */
+function vStats(){const t=totals();let sd=0,sc=0,days=[];for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const k=key(d),c=dayCount(k),s=Math.max(c,questsOn(k).length);sd+=c;sc+=s;days.push([DOW[d.getDay()],c])}
+const mx=Math.max(1,...days.map(x=>x[1])),cats={};for(const d in S.log)for(const i in S.log[d])cats[S.log[d][i].c]=(cats[S.log[d][i].c]||0)+1;const cx=Math.max(1,...Object.values(cats));
+const y=cm.getFullYear(),m=cm.getMonth(),first=new Date(y,m,1).getDay(),nd=new Date(y,m+1,0).getDate();let cells=DOW.map(n=>'<div class="h">'+n+'</div>').join('')+'<div></div>'.repeat(first);
+for(let i=1;i<=nd;i++){const k=key(new Date(y,m,i)),c=dayCount(k);cells+='<div onclick="selDay=\''+k+'\';render()" style="'+(c?'background:'+mix(resolve(S.theme)['--card'],resolve(S.theme)['--prog'],Math.min(.25+c*.15,.9))+';':'')+(k==selDay?'outline:2px solid var(--pri)':'')+'">'+i+'</div>'}
+const sl=selDay?Object.values(S.log[selDay]||{}):[];
+return '<h2>สถิติและประวัติ</h2><div class="row"><div class="card g"><small>ทำสำเร็จทั้งหมด</small><h2>'+t.n+'</h2></div><div class="card g"><small>EXP สะสม</small><h2>'+S.exp+'</h2></div></div><div class="row"><div class="card g"><small>ต่อเนื่อง</small><h2>🔥 '+t.cur+' วัน</h2></div><div class="card g"><small>อัตราสำเร็จ 7 วัน</small><h2>'+(sc?Math.round(sd/sc*100):0)+'%</h2></div></div>'+
+'<div class="card"><h3>7 วันล่าสุด</h3><div class="chart" style="margin-top:10px">'+days.map(d=>'<div><small>'+d[1]+'</small><i style="height:'+d[1]/mx*80+'px"></i>'+d[0]+'</div>').join('')+'</div></div>'+
+'<div class="card"><div class="row sp"><button class="sec" onclick="cm.setMonth(cm.getMonth()-1);render()">‹</button><b>'+cm.toLocaleDateString('th-TH',{month:'long',year:'numeric'})+'</b><button class="sec" onclick="cm.setMonth(cm.getMonth()+1);render()">›</button></div><div class="cal" style="margin-top:10px">'+cells+'</div>'+(selDay?'<hr style="border-color:#8883"><small>'+thDate(selDay)+'</small>'+(sl.length?sl.map(e=>'<div>✅ '+esc(e.t)+' <small>+'+e.x+' EXP</small></div>').join(''):'<div><small>ไม่มีภารกิจที่ทำสำเร็จ</small></div>'):'')+'</div>'+
+'<div class="card"><h3>หมวดหมู่ที่ทำสม่ำเสมอ</h3>'+(Object.keys(cats).length?Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(c=>'<div style="margin-top:8px"><div class="row sp"><span>'+esc(c[0])+'</span><small>'+c[1]+' ครั้ง</small></div><div class="bar"><i style="width:'+c[1]/cx*100+'%"></i></div></div>').join(''):'<div class="emp">ยังไม่มีข้อมูล</div>')+'</div>'}
+function vProfile(){const t=totals(),L=lvlOf(S.exp);return '<div class="row sp"><h2>โปรไฟล์ตัวละคร</h2><button class="sec" onclick="go(\'settings\')">⚙️</button></div><div class="card" style="text-align:center"><div class="av">'+S.avatar+'</div><h2 style="margin-top:10px">'+esc(S.name)+'</h2><div>LV '+L.l+' · '+S.exp+' EXP รวม</div><div class="bar" style="margin:8px 0"><i style="width:'+L.cur/L.need*100+'%"></i></div><small>อีก '+(L.need-L.cur)+' EXP ถึงเลเวลถัดไป</small><br><br><button class="sec" onclick="editProf()">✏️ แก้ไขชื่อ/ตัวละคร</button></div><div class="row"><div class="card g"><small>ภารกิจสำเร็จ</small><h3>'+t.n+'</h3></div><div class="card g"><small>ต่อเนื่อง</small><h3>🔥 '+t.cur+'</h3></div><div class="card g"><small>อ่านหนังสือ</small><h3>'+(t.read/60).toFixed(1)+' ชม.</h3></div></div><div class="card"><h3>Achievement</h3><div class="ach" style="margin-top:10px">'+ACH.map(a=>'<div class="'+(S.ach[a[0]]?'':'lk')+'"><b>'+a[1]+'</b>'+a[2]+'<br><small>'+a[3]+'</small></div>').join('')+'</div></div>'}
+function editProf(){E.av=S.avatar;modal('<h3>แก้ไขโปรไฟล์</h3><label>ชื่อผู้เล่น</label><input id="p_n" value="'+esc(S.name)+'" maxlength="20"><label>ตัวละคร</label><div class="seg" id="p_a" style="font-size:26px">'+AVS.map(a=>'<span class="'+(a==E.av?'on':'')+'" onclick="E.av=\''+a+'\';document.querySelectorAll(\'#p_a span\').forEach(s=>s.classList.toggle(\'on\',s.textContent==E.av))">'+a+'</span>').join('')+'</div><button style="width:100%" onclick="const n=$(\'#p_n\').value.trim();if(!n){toast(\'กรุณาใส่ชื่อ\');return}S.name=n;S.avatar=E.av;save();closeModal();render()">บันทึก</button>')}
+function vSettings(){return '<h2>ตั้งค่า</h2><div class="card"><div class="lnk" onclick="go(\'notif\')"><span>🔔 การแจ้งเตือน</span>›</div><div class="lnk" onclick="go(\'theme\')"><span>🎨 สีและธีม</span>›</div><div class="lnk" style="border:0" onclick="go(\'general\')"><span>⚙️ ตั้งค่าทั่วไป</span>›</div></div>'}
+function vGeneral(){return back('ตั้งค่าทั่วไป')+'<div class="card"><h3>บัญชีและการซิงก์</h3><p>'+esc(USER?USER.email:'')+'<br><small>'+(S.dirty?'⏳ มีข้อมูลรอซิงก์':'✓ ซิงก์กับคลาวด์แล้ว')+'</small></p><div class="row"><button class="sec g" onclick="doSync().then(()=>toast(S.dirty?\'ซิงก์ไม่สำเร็จ ลองใหม่เมื่อมีอินเทอร์เน็ต\':\'ซิงก์แล้ว ✓\'))">🔄 ซิงก์ตอนนี้</button><button class="sec g" onclick="logout()">ออกจากระบบ</button></div></div><div class="card"><h3>ข้อมูล</h3><p><small>ข้อมูลเก็บในบัญชีของคุณบน Supabase และแคชไว้ในเครื่องเพื่อใช้ออฟไลน์ได้ชั่วคราว</small></p><button class="dng" onclick="ask(\'ลบข้อมูลทั้งหมด (รวมบนคลาวด์) และเริ่มใหม่? กู้คืนไม่ได้\',resetAll)">🗑 ลบข้อมูลทั้งหมด</button></div><div class="card"><h3>เกี่ยวกับ</h3><small>LIFE QUEST · EXP: ง่าย 10 / กลาง 25 / ยาก 50 · ครบทั้งวัน +30 · EXP ไม่ถูกหักเมื่อพลาดภารกิจ</small></div>'}
+function vNotif(){const n=S.notif,p=('Notification' in window)?Notification.permission:'unsupported';
+const tg=(k,l,v,f)=>'<div class="tgl"><span>'+l+'</span><input type="checkbox" '+(v?'checked':'')+' onchange="'+f+';save()"></div>';
+return back('การแจ้งเตือน')+'<div class="card">'+tg('on','เปิดการแจ้งเตือน',n.on,'S.notif.on=this.checked')+'<div class="tgl"><span>สิทธิ์แจ้งเตือนของระบบ</span><button class="sec" onclick="askPerm()">'+(p=='granted'?'อนุญาตแล้ว ✓':p=='denied'?'ถูกปิดกั้น':p=='unsupported'?'ไม่รองรับ':'ขอสิทธิ์')+'</button></div><small>⚠️ แจ้งเตือนทำงานขณะเปิดแอปค้างไว้เท่านั้น การเตือนตอนปิดแอปต้องใช้ Push Backend/แอปเนทีฟ ซึ่งเวอร์ชันนี้ยังไม่มี หากระบบไม่อนุญาต จะแสดงเป็นแถบข้อความในแอปแทน</small></div><div class="card"><h3>เตือนก่อนถึงเวลา</h3>'+tg('','10 นาที',n.leads.includes(10),'tl(10,this.checked)')+tg('','30 นาที',n.leads.includes(30),'tl(30,this.checked)')+tg('','เตือนเมื่อถึงเวลาภารกิจ',n.end,'S.notif.end=this.checked')+'<label>สรุปจำนวนภารกิจที่เหลือเวลา (ว่าง = ปิด)</label><input type="time" value="'+(n.sum||'')+'" onchange="S.notif.sum=this.value;save()"></div><div class="card"><h3>ช่วงห้ามรบกวน</h3>'+tg('','เปิดใช้งาน',n.quiet.on,'S.notif.quiet.on=this.checked')+'<div class="row"><div class="g"><label>เริ่ม</label><input type="time" value="'+n.quiet.from+'" onchange="S.notif.quiet.from=this.value;save()"></div><div class="g"><label>สิ้นสุด</label><input type="time" value="'+n.quiet.to+'" onchange="S.notif.quiet.to=this.value;save()"></div></div></div>'}
+function tl(v,on){const a=S.notif.leads;on?a.includes(v)||a.push(v):S.notif.leads=a.filter(x=>x!=v)}
+async function askPerm(){try{await Notification.requestPermission()}catch(e){toast('ขอสิทธิ์ไม่ได้ในสภาพแวดล้อมนี้')}render()}
+/* theme page */
+const CK=[['pri','สีหลัก'],['btn','สีปุ่ม'],['bg','สีพื้นหลัง'],['card','สีการ์ด'],['prog','สีแถบ EXP'],['txt','สีข้อความ']];
+function vTheme(){const r=resolve(D);return back('สีและธีม')+'<div class="card"><h3>ชุดสีสำเร็จรูป</h3><div class="row" style="flex-wrap:wrap;margin:10px 0">'+Object.keys(PRE).map(k=>'<div style="text-align:center;font-size:11px;width:30%"><div class="sw '+(D.preset==k?'on':'')+'" style="background:linear-gradient(135deg,'+PRE[k].pri+' 50%,'+PRE[k].bg+' 50%);margin:0 auto 4px" onclick="D.preset=\''+k+'\';D.ov={};render()"></div>'+PRE[k].n+'</div>').join('')+'</div><h3>โหมด</h3><div class="seg">'+[['dark','มืด'],['light','สว่าง'],['auto','อัตโนมัติ']].map(m=>'<span class="'+(D.mode==m[0]?'on':'')+'" onclick="D.mode=\''+m[0]+'\';render()">'+m[1]+'</span>').join('')+'</div></div>'+
+'<div class="card"><h3>ปรับแต่งสีเอง</h3>'+CK.map(c=>'<div class="row"><span style="width:90px">'+c[1]+'</span><input type="color" id="c_'+c[0]+'" value="'+(okHex(r['--'+c[0]])?r['--'+c[0]]:'#000000')+'" oninput="setC(\''+c[0]+'\',this.value,1)"><input id="h_'+c[0]+'" value="'+(D.ov[c[0]]||r['--'+c[0]]).toUpperCase()+'" maxlength="7" oninput="setC(\''+c[0]+'\',this.value,0)" placeholder="#7857FF"><button class="sec" onclick="delete D.ov[\''+c[0]+'\'];render()">↺</button></div>').join('')+'<small id="cw"></small></div>'+
+'<div class="card"><h3>ตัวอย่าง</h3><div id="pv" style="background:var(--bg);color:var(--txt);border-radius:16px;padding:12px;margin-top:8px"><div class="card" style="margin:0 0 8px"><div class="row sp"><b>⚔️ อ่านหนังสือ 20 นาที</b><small>+10 EXP</small></div><div class="bar" style="margin:8px 0"><i style="width:60%"></i></div><button class="ck">ทำแล้ว</button></div><small style="color:var(--mut)">ข้อความรองบนพื้นหลัง</small></div></div>'+
+'<div class="row"><button class="g" onclick="S.theme=JSON.parse(JSON.stringify(D));save();render();toast(\'ใช้ธีมนี้แล้ว\')">✓ ใช้ธีมนี้</button><button class="sec g" onclick="D={preset:\'fantasy\',mode:\'dark\',ov:{}};S.theme=JSON.parse(JSON.stringify(D));save();render()">คืนค่าเริ่มต้น</button></div>'+
+'<div class="card"><h3>ธีมของฉัน</h3><div class="row"><input id="tn" placeholder="ตั้งชื่อธีม" maxlength="20"><button style="white-space:nowrap" onclick="saveTheme()">บันทึก</button></div>'+(S.saved.length?S.saved.map((s,i)=>'<div class="row sp" style="margin-top:6px"><span>🎨 '+esc(s.name)+'</span><span><button class="sec" onclick="D=JSON.parse(JSON.stringify(S.saved['+i+'].t));render()">เลือก</button> <button class="dng" onclick="S.saved.splice('+i+',1);save();render()">ลบ</button></span></div>').join(''):'<small>ยังไม่มีธีมที่บันทึกไว้</small>')+'</div>'}
+function setC(k,v,pick){if(!pick&&v[0]!='#')v='#'+v;if(!okHex(v))return;D.ov[k]=v.toLowerCase();if(pick)$('#h_'+k).value=v.toUpperCase();else $('#c_'+k).value=v;prev()}
+function prev(){const e=$('#pv');if(e)paint(e,D);const r=resolve(D),a=ratio(r['--txt'],r['--bg']),b=ratio(r['--onbtn'],r['--btn']),c=ratio(r['--ctxt'],r['--card']);const w=$('#cw');if(w)w.innerHTML=(Math.min(a,b,c)<4.5?'⚠️ ความคมชัดต่ำ (ข้อความ '+a.toFixed(1)+' · การ์ด '+c.toFixed(1)+' · ปุ่ม '+b.toFixed(1)+') ควรเปลี่ยนสี':'✓ อ่านง่ายทุกส่วน (ข้อความ '+a.toFixed(1)+':1)')}
+function saveTheme(){const n=$('#tn').value.trim();if(!n){toast('ตั้งชื่อธีมก่อน');return}S.saved.push({name:n,t:JSON.parse(JSON.stringify(D))});save();render();toast('บันทึกธีมแล้ว')}
+function vIntro(){return '<div style="text-align:center;padding-top:30px"><div style="font-size:70px">⚔️</div><h1 style="font-size:34px;letter-spacing:2px">LIFE QUEST</h1><p style="color:var(--mut)">เปลี่ยนชีวิตจริงให้เป็นเกม RPG<br>สร้างภารกิจ รับ EXP เลเวลอัป ปลดล็อก Achievement</p></div><div class="card"><label>ชื่อผู้เล่น</label><input id="o_n" maxlength="20" placeholder="ตั้งชื่อฮีโร่ของคุณ"><label>เลือกตัวละคร</label><div class="seg" id="o_a" style="font-size:28px">'+AVS.map(a=>'<span class="'+(a==S.avatar?'on':'')+'" onclick="S.avatar=\''+a+'\';document.querySelectorAll(\'#o_a span\').forEach(s=>s.classList.toggle(\'on\',s.textContent==S.avatar))">'+a+'</span>').join('')+'</div><button style="width:100%;margin-top:10px" onclick="const n=$(\'#o_n\').value.trim();if(!n){toast(\'กรุณาใส่ชื่อผู้เล่น\');return}S.name=n;S.onboarded=true;save();render()">เริ่มการผจญภัย</button></div>'}
+function render(){paint(document.documentElement,R=='theme'&&D?D:S.theme);document.body.style.background='var(--bg)';
+const V={home:vHome,quests:vQuests,stats:vStats,profile:vProfile,settings:()=>back('ตั้งค่า','profile').slice(0,0)+vSettings(),notif:vNotif,theme:vTheme,general:vGeneral};
+$('#app').innerHTML=booting?'<div class="emp" style="padding-top:40vh">⚔️ กำลังโหลด…</div>':!USER?vAuth():S.onboarded?V[R]()+nav():vIntro();if(R=='theme'&&S.onboarded&&USER&&!booting)prev()}
+matchMedia('(prefers-color-scheme: dark)').addEventListener&&matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>render());
+const SB_URL='https://fgmdmklwcwtkiyrwvusy.supabase.co',SB_KEY='sb_publishable_RyU5wwcBta4KgU5nyAiTFw_n3PStrtC';
+let sb=null,USER=null,booting=true,syncing=false,syncT=null,synced=new Set(),AM={mode:'in',err:'',busy:false,e:''};
+try{sb=supabase.createClient(SB_URL,SB_KEY)}catch(e){}
+const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+function vAuth(){const up=AM.mode=='up';return '<div style="text-align:center;padding-top:30px"><div style="font-size:70px">⚔️</div><h1 style="font-size:34px;letter-spacing:2px">LIFE QUEST</h1><p style="color:var(--mut)">เข้าสู่ระบบเพื่อซิงก์ภารกิจข้ามอุปกรณ์</p></div><div class="card"><div class="seg"><span class="'+(up?'':'on')+'" onclick="AM.mode=\'in\';AM.err=\'\';render()">เข้าสู่ระบบ</span><span class="'+(up?'on':'')+'" onclick="AM.mode=\'up\';AM.err=\'\';render()">สมัครสมาชิก</span></div><label>อีเมล</label><input id="a_e" type="email" autocomplete="email" value="'+esc(AM.e)+'"><label>รหัสผ่าน (อย่างน้อย 6 ตัว)</label><input id="a_p" type="password" autocomplete="'+(up?'new-password':'current-password')+'">'+(AM.err?'<p style="color:#f87171">'+esc(AM.err)+'</p>':'')+(sb?'':'<p style="color:#f87171">โหลดบริการล็อกอินไม่สำเร็จ ตรวจสอบอินเทอร์เน็ตแล้วรีเฟรช</p>')+'<button style="width:100%" '+(AM.busy||!sb?'disabled':'')+' onclick="doAuth()">'+(AM.busy?'กำลังดำเนินการ…':up?'สมัครสมาชิก':'เข้าสู่ระบบ')+'</button></div>'}
+async function doAuth(){const e=$('#a_e').value.trim(),p=$('#a_p').value;AM.e=e;AM.err='';if(!e||p.length<6){AM.err='กรอกอีเมลและรหัสผ่านอย่างน้อย 6 ตัว';render();return}
+AM.busy=true;render();
+try{const r=AM.mode=='up'?await sb.auth.signUp({email:e,password:p}):await sb.auth.signInWithPassword({email:e,password:p});if(r.error)throw r.error;
+if(!r.data.session){AM.err='สมัครแล้ว กรุณายืนยันอีเมลก่อนเข้าสู่ระบบ';AM.mode='in'}}
+catch(x){AM.err=/invalid login/i.test(x.message)?'อีเมลหรือรหัสผ่านไม่ถูกต้อง':/already/i.test(x.message)?'อีเมลนี้สมัครแล้ว ลองเข้าสู่ระบบ':x.message}
+AM.busy=false;render()}
+function initAuth(){setTimeout(()=>{if(booting&&!USER){booting=false;render()}},5000);if(!sb){booting=false;render();return}
+sb.auth.onAuthStateChange((ev,s)=>{if(s&&s.user){if(!USER||USER.id!=s.user.id){USER=s.user;setTimeout(onLogin,0)}}else if(ev=='SIGNED_OUT'||ev=='INITIAL_SESSION'){USER=null;booting=false;render()}})}
+async function onLogin(){booting=true;render();try{await pull()}catch(e){console.warn(e);toast('โหลดข้อมูลจากคลาวด์ไม่สำเร็จ ใช้ข้อมูลในเครื่องแทน')}booting=false;render();tick()}
+function fixIds(){const m={};S.quests.forEach(q=>{if(!UUID.test(q.id)){m[q.id]=crypto.randomUUID();q.id=m[q.id]}});
+for(const d in S.log){const L=S.log[d];for(const k of Object.keys(L)){if(m[k]){L[m[k]]=L[k];delete L[k]}else if(!UUID.test(k)){L[crypto.randomUUID()]=L[k];delete L[k]}}}}
+async function pull(){const u=USER.id;if(S.uid==u&&S.dirty)await push();
+const[p,q,c]=await Promise.all([sb.from('profiles').select('*').eq('id',u).maybeSingle(),sb.from('quests').select('*').eq('user_id',u),sb.from('completions').select('*').eq('user_id',u)]);
+const er=p.error||q.error||c.error;if(er)throw er;
+if(!p.data){S.uid=u;await push();return}
+const pr=p.data,n=pr.notif||{},t=pr.theme||{},log={};
+c.data.forEach(r=>{(log[r.day]=log[r.day]||{})[r.quest_id]={t:r.title,c:r.cat,x:r.exp,m:r.mins||0}});
+S=Object.assign(DEF(),{uid:u,name:pr.name||'',avatar:pr.avatar||'🧙',onboarded:!!pr.name,exp:pr.exp||0,quests:q.data.map(r=>Object.assign(r.data,{id:r.id})),log,bonus:n.bonus||{},ach:n.ach||{},theme:t.theme||DEF().theme,saved:t.saved||[],notif:n.notif||DEF().notif});
+synced=new Set(c.data.map(r=>r.day+r.quest_id));saveLocal()}
+async function push(){if(!sb||!USER)return;const u=USER.id;fixIds();
+let r=await sb.from('profiles').upsert({id:u,name:S.name,avatar:S.avatar,exp:S.exp,theme:{theme:S.theme,saved:S.saved},notif:{notif:S.notif,ach:S.ach,bonus:S.bonus}});if(r.error)throw r.error;
+if(S.quests.length){r=await sb.from('quests').upsert(S.quests.map(q=>({id:q.id,user_id:u,data:q})));if(r.error)throw r.error}
+if(S.del.length){r=await sb.from('quests').delete().in('id',S.del).eq('user_id',u);if(r.error)throw r.error;S.del=[]}
+const rows=[];for(const d in S.log)for(const k in S.log[d]){if(synced.has(d+k))continue;const e=S.log[d][k];rows.push({user_id:u,quest_id:k,day:d,title:e.t,cat:e.c,exp:e.x,mins:e.m||0})}
+if(rows.length){r=await sb.from('completions').upsert(rows,{onConflict:'user_id,quest_id,day'});if(r.error)throw r.error;rows.forEach(w=>synced.add(w.day+w.quest_id))}
+S.dirty=false;S.uid=u;saveLocal()}
+function queueSync(){if(!USER)return;clearTimeout(syncT);syncT=setTimeout(doSync,1200)}
+async function doSync(){if(syncing){syncT=setTimeout(doSync,1500);return}syncing=true;try{await push()}catch(e){console.warn(e)}syncing=false}
+addEventListener('online',()=>{if(USER&&S.dirty)doSync()});
+async function logout(){if(S.dirty){try{await push()}catch(e){}}try{await sb.auth.signOut()}catch(e){}S=DEF();synced=new Set();saveLocal();USER=null;R='home';render()}
+async function resetAll(){try{const u=USER.id;for(const [t,c] of [['completions','user_id'],['quests','user_id'],['profiles','id']]){const r=await sb.from(t).delete().eq(c,u);if(r.error)throw r.error}}catch(e){toast('ลบข้อมูลบนคลาวด์ไม่สำเร็จ');return}S=DEF();synced=new Set();saveLocal();R='home';render()}
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
+render();tick();initAuth();
+</script></body></html>
