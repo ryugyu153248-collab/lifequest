@@ -59,6 +59,40 @@ nav{border-radius:22px 22px 0 0;border:1px solid color-mix(in srgb,var(--pri) 30
 .hero:after{content:'';position:absolute;left:0;right:0;bottom:0;height:60px;background:linear-gradient(transparent,var(--bg))}
 .ring{width:120px;height:120px;border-radius:50%;display:grid;place-items:center;flex:none}.ring div{width:90px;height:90px;border-radius:50%;background:var(--card);display:grid;place-items:center}
 .ir{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #8882}
+
+:root{--star:#ffffff90;--sh:#00000066}
+body{background:radial-gradient(circle 2px at 12% 18%,var(--star),transparent),radial-gradient(circle 1.5px at 78% 12%,var(--star),transparent),radial-gradient(circle 2px at 40% 52%,var(--star),transparent),radial-gradient(circle 1.5px at 88% 63%,var(--star),transparent),radial-gradient(circle 1.5px at 22% 82%,var(--star),transparent),radial-gradient(800px 460px at 50% -100px,color-mix(in srgb,var(--pri) 42%,transparent),transparent),radial-gradient(600px 400px at 100% 100%,color-mix(in srgb,var(--prog) 18%,transparent),transparent),var(--bg);background-attachment:fixed}
+.card{background:linear-gradient(155deg,color-mix(in srgb,var(--card) 86%,#fff 14%),var(--card) 60%);border:1px solid color-mix(in srgb,var(--pri) 38%,transparent);box-shadow:0 8px 24px var(--sh),inset 0 1px 0 #ffffff14;border-radius:20px}
+button,.btn{border-radius:14px;padding:12px 16px;background:linear-gradient(135deg,var(--btn),color-mix(in srgb,var(--btn) 50%,var(--prog)));box-shadow:0 6px 18px color-mix(in srgb,var(--btn) 50%,transparent),inset 0 1px 0 #ffffff33;transition:transform .12s,filter .12s}
+button:active{transform:scale(.97);filter:brightness(1.12)}
+button.sec{background:color-mix(in srgb,var(--ctxt) 10%,transparent);color:var(--ctxt);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ctxt) 16%,transparent)}
+button.dng{background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff;box-shadow:0 4px 14px #ef444455}
+.fab{bottom:calc(92px + env(safe-area-inset-bottom,0px));box-shadow:0 0 0 6px color-mix(in srgb,var(--pri) 22%,transparent),0 8px 26px color-mix(in srgb,var(--pri) 70%,transparent)}
+input,select,textarea{background:color-mix(in srgb,var(--ctxt) 7%,transparent);border:1px solid color-mix(in srgb,var(--pri) 30%,transparent);border-radius:14px;padding:12px;outline:0;transition:.15s}
+input:focus,select:focus,textarea:focus{border-color:var(--pri);box-shadow:0 0 0 3px color-mix(in srgb,var(--pri) 25%,transparent)}
+input[type=checkbox]{-webkit-appearance:none;appearance:none;width:48px!important;height:28px;border-radius:14px;background:color-mix(in srgb,var(--ctxt) 22%,transparent);position:relative;cursor:pointer;margin:0;padding:0;border:0;flex:none;transition:.2s}
+input[type=checkbox]::after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 2px 6px #0005}
+input[type=checkbox]:checked{background:linear-gradient(135deg,var(--btn),var(--prog));box-shadow:0 0 12px color-mix(in srgb,var(--btn) 60%,transparent)}
+input[type=checkbox]:checked::after{left:23px}
+.seg>*{border-radius:14px;background:color-mix(in srgb,var(--ctxt) 9%,transparent);border:1px solid color-mix(in srgb,var(--ctxt) 12%,transparent);padding:9px 14px;transition:.15s}
+.seg>*.on{background:linear-gradient(135deg,var(--btn),color-mix(in srgb,var(--btn) 50%,var(--prog)));color:var(--onbtn);border-color:transparent;box-shadow:0 4px 14px color-mix(in srgb,var(--btn) 45%,transparent);font-weight:700}
+nav{left:50%;right:auto;transform:translateX(-50%);width:calc(100% - 24px);max-width:456px;bottom:calc(10px + env(safe-area-inset-bottom,0px));padding:8px;border-radius:26px;background:color-mix(in srgb,var(--card) 82%,transparent);backdrop-filter:blur(16px);border:1px solid color-mix(in srgb,var(--pri) 35%,transparent);box-shadow:0 10px 30px var(--sh)}
+nav div{max-width:none}nav a{border-radius:18px;padding:6px 4px;transition:.15s}nav a.on{background:color-mix(in srgb,var(--pri) 20%,transparent)}
+#md{backdrop-filter:blur(6px);background:#000a}
+.sheet{border-radius:28px 28px 0 0;border:1px solid color-mix(in srgb,var(--pri) 35%,transparent);border-bottom:0;box-shadow:0 -10px 40px #0008;background:linear-gradient(180deg,color-mix(in srgb,var(--card) 88%,#fff 12%),var(--card) 40%);animation:up .25s}
+.sheet:before{content:'';display:block;width:40px;height:4px;border-radius:2px;background:color-mix(in srgb,var(--ctxt) 30%,transparent);margin:-6px auto 12px}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.bar{height:12px;background:color-mix(in srgb,var(--ctxt) 14%,transparent);box-shadow:inset 0 1px 3px #0004}
+.bar i{background:linear-gradient(90deg,var(--pri),var(--prog));box-shadow:0 0 12px color-mix(in srgb,var(--prog) 70%,transparent)}
+.ic{width:50px;height:50px;border-radius:16px;font-size:27px}
+.q{padding:13px}.q.dn{border-color:#22c55e;box-shadow:0 0 18px #22c55e44,0 8px 24px var(--sh)}
+.rc{width:36px;height:36px;font-size:18px;font-weight:700;border:2px solid color-mix(in srgb,var(--ctxt) 30%,transparent)}.rc.f{box-shadow:0 0 12px #22c55e!important}
+.tag{border:1px solid color-mix(in srgb,currentColor 40%,transparent)}
+.chart i{background:linear-gradient(var(--prog),var(--pri));box-shadow:0 0 10px color-mix(in srgb,var(--prog) 50%,transparent)}
+.ring{box-shadow:0 0 24px color-mix(in srgb,var(--prog) 40%,transparent)}
+.ach div{background:color-mix(in srgb,var(--ctxt) 8%,transparent);border:1px solid color-mix(in srgb,var(--ctxt) 12%,transparent);border-radius:16px}.ach div:not(.lk){border-color:color-mix(in srgb,var(--pri) 50%,transparent);box-shadow:0 0 14px color-mix(in srgb,var(--pri) 30%,transparent)}
+.sw.on{box-shadow:0 0 16px var(--pri)}.lnk{padding:16px 6px}
+#ts div{background:linear-gradient(135deg,var(--btn),color-mix(in srgb,var(--btn) 50%,var(--prog)));color:var(--onbtn);border-radius:16px}
 </style></head><body>
 <div id="app"></div><div id="md" onclick="if(event.target==this)closeModal()"></div><div id="ts"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -94,7 +128,7 @@ function resolve(t){const p=PRE[t.preset]||PRE.fantasy,o=t.ov||{};const m=t.mode
 const fx=c=>L&&lum(c)>.6?mix(c,'#000000',.65):c;
 const bg=o.bg||(L?mix(p.pri,'#ffffff',.93):p.bg),card=o.card||(L?'#ffffff':p.card),btn=o.btn||fx(p.btn),pri=o.pri||fx(p.pri),prog=o.prog||fx(p.prog);
 const txt=o.txt||ink(bg),ctxt=o.txt||ink(card);
-return{'--pri':pri,'--btn':btn,'--prog':prog,'--bg':bg,'--card':card,'--txt':txt,'--ctxt':ctxt,'--onbtn':ink(btn),'--mut':mix(ctxt,card,.4)}}
+return{'--star':L?'#0000':'#ffffff90','--sh':L?'#0000001f':'#00000066','--pri':pri,'--btn':btn,'--prog':prog,'--bg':bg,'--card':card,'--txt':txt,'--ctxt':ctxt,'--onbtn':ink(btn),'--mut':mix(ctxt,card,.4)}}
 function paint(el,t){const v=resolve(t);for(const k in v)el.style.setProperty(k,v[k])}
 /* ---------- game logic ---------- */
 function lvlOf(x){let l=1,need=100;while(x>=need){x-=need;l++;need=100+(l-1)*50}return{l,cur:x,need}}
@@ -142,7 +176,7 @@ const titleOf=l=>l<3?'Novice':l<5?'Apprentice':l<8?'Adventurer':l<12?'Hero':'Leg
 const NS='<div class="card"><h3>ตัวอย่างข้อความแจ้งเตือน</h3>'+[['📚','ภารกิจอ่านหนังสือของคุณยังรออยู่','20:00'],['⭐','วันนี้เหลืออีก 2 ภารกิจ อย่าลืมรับ EXP','18:00'],['⌛','เหลือเวลาอีก 1 ชั่วโมงก่อนหมดเวลาภารกิจ','']].map(a=>'<div class="ir"><span>'+a[0]+' '+a[1]+'</span><small>'+a[2]+'</small></div>').join('')+'</div>';
 function qs(k){$('#f_t').value=k;suggest()}
 function qCard(q,d){const dn=done(q,d),f=DIFF[q.diff],c=cc(q.cat);
-return '<div class="card q '+(dn?'dn':'')+'" onclick="detail(\''+q.id+'\',\''+d+'\')"><div class="ic" style="background:'+c+'33">'+q.icon+'</div><div class="qb"><b>'+esc(q.title)+'</b><span><span class="tag" style="background:'+c+'33;color:'+c+'">'+esc(q.cat)+'</span><span class="tag" style="background:#8882;color:var(--prog)">+'+f.x+' EXP</span></span></div><small style="text-align:right">'+(d==today()?'วันนี้ ':'')+(q.time||'ทั้งวัน')+'</small>'+(d==today()?'<button class="rc '+(dn?'f':'')+'" '+(dn?'disabled':'')+' onclick="event.stopPropagation();complete(\''+q.id+'\',\''+d+'\')">'+(dn?'✓':'')+'</button>':'')+'</div>'}
+return '<div class="card q '+(dn?'dn':'')+'" onclick="detail(\''+q.id+'\',\''+d+'\')"><div class="ic" style="background:linear-gradient(145deg,'+c+'66,'+c+'1a);box-shadow:0 0 14px '+c+'55,inset 0 0 0 1px '+c+'66">'+q.icon+'</div><div class="qb"><b>'+esc(q.title)+'</b><span><span class="tag" style="background:'+c+'33;color:'+c+'">'+esc(q.cat)+'</span><span class="tag" style="background:#8882;color:var(--prog)">+'+f.x+' EXP</span></span></div><small style="text-align:right">'+(d==today()?'วันนี้ ':'')+(q.time||'ทั้งวัน')+'</small>'+(d==today()?'<button class="rc '+(dn?'f':'')+'" '+(dn?'disabled':'')+' onclick="event.stopPropagation();complete(\''+q.id+'\',\''+d+'\')">'+(dn?'✓':'')+'</button>':'')+'</div>'}
 function vHome(){const d=today(),ls=questsOn(d),dn=ls.filter(q=>done(q,d)).length,L=lvlOf(S.exp);
 return '<div class="hd"><div class="av2">'+S.avatar+'</div><div class="g"><b style="font-size:17px">'+esc(S.name)+'</b><div><small>Lv.'+L.l+' '+titleOf(L.l)+'</small></div><div class="bar" style="height:8px;margin:5px 0 2px"><i style="width:'+L.cur/L.need*100+'%"></i></div><small>'+L.cur+' / '+L.need+' EXP</small></div><button class="sec" onclick="go(\'notif\')">🔔</button></div>'+
 '<div class="card"><div class="row sp"><h3>ภารกิจวันนี้</h3><small style="color:var(--prog)">◈ '+dn+'/'+ls.length+' สำเร็จ</small></div><div class="dots">'+ls.slice(0,12).map(q=>'<i class="'+(done(q,d)?'f':'')+'">'+(done(q,d)?'✓':'')+'</i>').join('')+'</div><small>'+thDate(d)+(ls.length&&dn==ls.length?' · 🎉 ครบแล้ว!':' · ครบทั้งวันรับโบนัส +30 EXP')+'</small></div>'+
